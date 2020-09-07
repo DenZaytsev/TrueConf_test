@@ -3,6 +3,7 @@ from .models import User
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
+    """Сериалайзер для создания пользователя"""
     class Meta:
         model = User
         fields = ('email', 'username', 'password')
