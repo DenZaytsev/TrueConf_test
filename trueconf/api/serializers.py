@@ -1,16 +1,9 @@
 from rest_framework import serializers
-from .models import User
 
 
-class UserCreateSerializer(serializers.ModelSerializer):
-    """Сериалайзер для создания пользователя"""
-    class Meta:
-        model = User
-        fields = ('email', 'username', 'password')
-        write_only_fields = ('password',)
+class UserCreateSerializer(serializers.Serializer):
+    pass
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'email', 'username')
+class UserSerializer(serializers.Serializer):
+    pass
