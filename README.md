@@ -10,7 +10,7 @@ $ sudo docker-compose build
 ---
 
 
-$ docker-compose up -d
+$ sudo docker-compose up -d
 
 
 В браузере http://localhost:8000/api/v1/
@@ -21,5 +21,5 @@ $ docker-compose up -d
 ---
 
 
-docker-compose logs -f
+sudo docker-compose logs -f
 
