@@ -1,49 +1,16 @@
-from .models import User
-from rest_framework.generics import (
-    CreateAPIView,
-    ListAPIView,
-    RetrieveAPIView,
-    RetrieveDestroyAPIView,
-    RetrieveUpdateAPIView
-)
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
-from .serializers import UserCreateSerializer, UserSerializer
-from rest_framework.pagination import PageNumberPagination
+from .serializers import UserCreateSerializer
 
 
-class Paginator(PageNumberPagination):
-    page_size = 10
-    page_query_param = 'page_size'
-    max_page_size = 10
-
-
-class UserCreateView(CreateAPIView):
-    """Создание пользователя"""
+class UserCreateView(APIView):
     serializer_class = UserCreateSerializer
     http_method_names = ['post']
 
+    def post(self, request):
+        serializer = UserCreateSerializer(data=request.POST)
+        if serializer.is_valid(raise_exception=True):
 
-class UserListView(ListAPIView):
-    """Возвращает список пользователей"""
-    serializer_class = UserSerializer
-    http_method_names = ['get']
-    queryset = User.objects.all()
-    pagination_class = Paginator
-
-
-class UserDetailView(RetrieveAPIView):
-    """Возвращает информацию о конкретном пользователе"""
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-class UserDeleteView(RetrieveDestroyAPIView):
-    """Удаление заданного пользователя"""
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-class UserUpdateView(RetrieveUpdateAPIView):
-    """Редактирование заданного пользователя"""
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+            serializer.save()
+        return Response({'ok': 200})
