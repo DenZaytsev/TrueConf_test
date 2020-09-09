@@ -21,7 +21,7 @@ class JsonDB:
 
     def _load_db(self):
         with open(self.location) as file:
-            self.db = json.load(file, )
+            self.db = json.load(file)
 
     def dump_db(self):
         with open(self.location, 'w') as file:
